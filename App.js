@@ -1,27 +1,38 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState} from 'react';
-import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
 
 export default function App() {
   const[people, setPeople] = useState([
-    {name: 'Ada', key:'1'},
-    {name: 'Romel', key: '2'}, 
-    {name: 'Ronerr', key: '3'},
-    {name: 'Nerressa', key: '4'}, 
-    {name: 'Romeo', key: '5'}, 
-    {name: 'Sarah', key: '6'}, 
-    {name: 'Adalona', key: '7'}, 
+    {name: 'Ada', id:'1'},
+    {name: 'Romel', id: '2'}, 
+    {name: 'Ronerr', id: '3'},
+    {name: 'Nerressa', id: '4'}, 
+    {name: 'Romeo', id: '5'}, 
+    {name: 'Sarah', id: '6'}, 
+    {name: 'Adalona', id: '7'}, 
   ]); 
 
   return (
     <View style={styles.container}>
-      <ScrollView> 
+      <FlatList 
+        numColumns={2}
+        keyExtractor={( item ) => item.id}
+        data={people} 
+        renderItem={({ item }) => (
+          <Text style={styles.item}>{item.name}</Text>
+        )}
+      
+      /> 
+
+
+      {/* <ScrollView> 
       { people.map(item => (
           <View key={item.key}> 
             <Text style={styles.item}>{item.name}</Text>
           </View>
         ))}
-      </ScrollView>
+      </ScrollView> */}
       <StatusBar style="auto" />
     </View>
   );
@@ -64,6 +75,7 @@ const styles = StyleSheet.create({
     padding: 30, 
     backgroundColor: 'pink', 
     fontSize: 24, 
+    marginHorizontal: 10, 
   }
 
 });
